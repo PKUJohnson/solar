@@ -1,0 +1,41 @@
+environment:
+    env: dev
+    bind: ":8080"
+    prefix: "/ddc"
+
+micro:
+    svc_addr: "127.0.0.1:10085"
+    svc_name: "ddcgateway"
+    advertise_subnets:
+      - "127.0.0.0/16"
+
+    consul:
+      -
+        addr: "127.0.0.1:8500"
+    client_pool_size: 30
+#    hystrix:
+#        enabled: true
+#        service_name: "gitlab.finxos.ddcstd.gateway.hystrix"
+#        dashboard_port: 8779
+#        consul_addrs:
+#            - "127.0.0.1:8500"
+#        redis:
+#            host: "127.0.0.1"
+#            port: 6379
+#            idle_timeout: 240
+    zipkin:
+        enabled: false
+        broker_addrs:
+          - "localhost:9092"
+#    rpc_server: "grpc"  # please comment this line in local debug
+
+    prometheus:
+        enabled: false
+        namespace: ddcstd
+        batch_interval: 5
+        collectors:
+          -
+            addr: "127.0.0.1:9091"
+
+logger:
+    level: 5

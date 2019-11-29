@@ -1,0 +1,144 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "gitlab.finxos.com/backend/std/pb";
+
+message Empty {
+}
+
+message CommonResultResp {
+    map<string, string> result = 1;
+}
+
+message Author {
+	int64 id = 1;
+	string display_name = 2;
+	string image = 3;
+	string gender = 4;
+	string email = 5;
+    string uri = 9;
+	int64 article_count = 6;
+	int64 followers_count = 7;
+	bool is_followed = 8;
+	string introduction = 10;
+}
+
+message UserInfo {
+    string app_type = 1;
+    int64 uid = 2;
+    string username = 3;
+    string display_name = 4;
+    string avatar = 5;
+    int64 created_at = 6;
+    bool frozen_flag = 7;
+    int64 banned_until = 8;
+    string mobile = 9;
+    string country = 10;
+    string province = 11;
+    string city = 12;
+    UserInfomation info = 13;
+}
+
+message UserSummary {
+    int64 uid = 1;
+    string display_name = 2;
+    string app_type = 3;
+    string image = 4;
+    string uri = 5;
+    string username = 6;
+    string mobile = 7;
+}
+
+message InternalUserSummary {
+    int64 uid = 1;
+    string display_name = 2;
+    string image = 3;
+    string uri = 4;
+    repeated string roles = 5;
+    string email = 6;
+    string introduction = 7;
+}
+
+message ContentForColumnist {
+  int64 content_id = 1;
+  string content_type = 2;
+  string content_title = 3;
+  string content_short = 4;
+  int64 content_createdat = 5;
+  string content_uri = 6;
+  string content_imageuri = 7;
+  int64 comment_count = 8;
+  int64 content_display_time = 9;
+}
+
+message UserForColumnist {
+  int64 user_id = 1;
+  string display_name = 2;
+  string image = 3;
+  string introduction = 4;
+  string user_uri = 5;
+  int64 follow_count = 6;
+  bool is_followed = 7;
+  int64 newarticles_count = 8;
+  int64 days_read_count = 9;
+}
+
+message ColumnistEntry {
+  int64 order = 1;
+  repeated ContentForColumnist contents = 2;
+  UserForColumnist user = 3;
+}
+
+message UserInfomation {
+	string real_name = 1;
+    string birthday = 2;
+    string personal_link = 3;
+    string education = 4;
+    string income = 5;
+    string position = 6;
+    string hobby = 7;
+    string investment = 8;
+    string introduction = 9;
+    string country = 10;
+    string industry = 11;
+    string gender = 12;
+    string company = 13;
+    string tel = 14;
+    string news_letter =15;
+    string wits_token = 16;
+}
+
+message LiveOperation {
+    int64 id = 1;
+    int64 op_id = 15;
+    string title = 2;
+    message LiveRelateArticle {
+        int64 id = 1;
+        string image_uri = 2;
+        string title = 3;
+        string uri = 4;
+        repeated string platforms = 5;
+    }
+    LiveRelateArticle article = 5;
+    repeated string channels = 6;
+    string content = 7;
+    string content_more = 8;
+    int64 display_time = 9;
+    repeated string image_uris = 10;
+    bool is_favourite = 11;
+    string op_name = 12;
+    int64 score = 13;
+    message Symbol {
+        string key = 1;
+        string name = 2;
+    }
+    message Tag {
+        string key = 1;
+        string name = 2;
+    }
+    repeated Symbol symbols = 14;
+    repeated Tag    tags = 17;
+    string content_text = 16;
+    string reference =18;
+}
+// protoc -I$GOPATH/src --proto_path=$GOPATH/src/gitlab.finxos.com/backend/std/pb   --go_out=plugins=micro:$GOPATH/src $GOPATH/src/gitlab.finxos.com/backend/std/pb/*.proto; cd $GOPATH/src/gitlab.finxos.com/backend/std/pb/ && ls *.pb.go | xargs -n1 -IX bash -c 'sed s/,omitempty// X > X.tmp && mv X{.tmp,}'

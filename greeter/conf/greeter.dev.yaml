@@ -1,0 +1,24 @@
+micro:
+    svc_name: "solar.greeter"
+    svc_addr: ":9001"
+    consul:
+      -
+        addr: "127.0.0.1:8500"
+    client_pool_size: 30
+    prometheus:
+        enabled: false
+        collectors:
+          -
+            addr: "prometheus:9091"
+    zipkin:
+        enabled: false
+        broker_addrs:
+          - "106.15.203.251"
+
+log:
+  output_dest: "file"
+  path: "./log/"
+  file_name: "greeter"
+  rotation_duration: "24h"
+  rotation_count: 32
+  level: 5
